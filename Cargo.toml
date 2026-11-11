@@ -1,0 +1,80 @@
+[package]
+name = "bezcaptcha"
+version = "0.3.0"
+publish = false
+edition = "2024"
+license = "AGPL-3.0-only"
+description = "Axum CAPTCHA using arc-length resampled cubic Bézier curves, harmonic Fourier jitter, 3D bridge weaves, and SHAKE256 MAC verification"
+keywords = ["captcha", "bezier", "axum", "shake256", "security"]
+repository = "https://github.com/Safari77/bezcaptcha"
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "README.md",
+]
+
+[lib]
+name = "bezcaptcha"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bezcaptcha"
+path = "src/main.rs"
+
+[[bin]]
+# cargo run --release --bin main_debug -- hard
+name = "main_debug"
+path = "src/bin/main_debug.rs"
+doc = false
+
+[[bin]]
+name = "test_captcha"
+path = "src/bin/test_captcha.rs"
+doc = false
+
+[[bench]]
+name = "captcha_benchmark"
+harness = false
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+base64 = "0.23"
+shake = "0.1"
+hex = "0.4"
+image = { version = "0.25", default-features = false }
+zenwebp = { version = "0.4", default-features = false, features = [ "std" ] }
+imageproc = { version = "0.27", default-features = false }
+ab_glyph = "0.2"
+rand = "0.10"
+subtle = "2"
+whereat = { version = "0.1.5", default-features = false }
+tempfile = "3"
+
+[dev-dependencies]
+criterion = { version = "0.8", features = ["html_reports"] }
+
+[profile.release]
+opt-level = 3
+debug = true
+strip = false
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unused_must_use = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+unimplemented = "deny"
+indexing_slicing = "deny"
+await_holding_lock = "deny"
+await_holding_refcell_ref = "deny"
+mem_forget = "deny"
+large_futures = "warn"

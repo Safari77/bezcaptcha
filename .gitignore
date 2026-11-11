@@ -1,0 +1,16 @@
+/target
+/Cargo.lock
+/tags
+/perf.data
+/perf.data.old
+/test_captcha.webp
+/test_captcha_solved.webp
+/test_captcha_easy_solved.webp
+/test_captcha_easy.webp
+/test_captcha_hard_solved.webp
+/test_captcha_hard.webp
+/test_captcha_medium_solved.webp
+/test_captcha_medium.webp
+/answer_*.webp
+*~
+.*.sw?

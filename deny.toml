@@ -1,0 +1,66 @@
+# The output table provides options for how/if diagnostics are outputted
+[output]
+feature-depth = 1
+
+# This section is considered when running `cargo deny check advisories`
+# More documentation for the advisories section can be found here:
+# https://embarkstudios.github.io/cargo-deny/checks/advisories/cfg.html
+[advisories]
+ignore = [
+    "RUSTSEC-2026-0192",
+    "RUSTSEC-2024-0436",
+]
+git-fetch-with-cli = false
+version = 2
+
+[licenses]
+version = 2
+unused-allowed-license = "allow"
+
+allow = [
+    # Standard permissive Rust ecosystem licenses
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "0BSD",
+    "CC0-1.0",
+    "Zlib",
+    "NCSA",
+    "Unicode-3.0",
+
+    # Compatible copyleft licenses
+    "GPL-3.0-only",
+    "GPL-3.0-or-later",
+    "AGPL-3.0-only",
+    "AGPL-3.0-or-later",
+
+    # LGPL is compatible when linked/incorporated under AGPL terms
+    "LGPL-3.0-only",
+    "LGPL-3.0-or-later",
+]
+
+# The confidence threshold for detecting a license from license text.
+# The higher the value, the more closely the license text must be to the
+# canonical license text of a valid SPDX license file.
+# [possible values: any between 0.0 and 1.0].
+confidence-threshold = 0.8
+
+[licenses.private]
+# Ignore private workspace crates if needed
+ignore = false
+
+[sources]
+# Lint level for what to happen when a crate from a crate registry that is not
+# in the allow list is encountered
+unknown-registry = "warn"
+# Lint level for what to happen when a crate from a git repository that is not
+# in the allow list is encountered
+unknown-git = "warn"
+# List of URLs for allowed crate registries. Defaults to the crates.io index
+# if not specified. If it is specified but empty, no registries are allowed.
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+# List of URLs for allowed Git repositories
+allow-git = []
